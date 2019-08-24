@@ -1,0 +1,119 @@
+﻿@model IEnumerable<SmartScreen.Models.BnrCustomer>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@using GraniteHouse2.Utility
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole(SD.AdminEndUser))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;Create New</a>
+        </p>
+
+        <table class="table table-striped border">
+            <thead>
+                <tr class="table-info">
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CustomerNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Vision)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Village)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Residence)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Education)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NaicsCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EconomicSubSectorCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EconomicSubSectorCodeISIC)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Vision.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Village.Villagelist)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Residence.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Education.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NaicsCode.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EconomicSubSectorCode.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EconomicSubSectorCodeISIC.Description)
+                        </td>
+
+                        @*<td>
+                                @if(User.IsInRole(SD.SuperAdminEndUser))
+                                {
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id" > Details </a>|
+
+                                <a asp-action="Delete" asp-route-id="@item.Id"> Delete</a>
+                                 }
+                            </td>*@
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+<p>
+    <a class="nav-link btn btn-info" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">User List</a>
+    @*<a asp-action="Create" >Create New</a>*@
+</p>
+        <li class="nav-item"></li>
+    }
+</body>
+</html>
+@section scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

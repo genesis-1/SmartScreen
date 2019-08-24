@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SmartScreen.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<br /><br />
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="text-info"> AdminUser List</h2>
+    </div>
+    <div class="col-6 text-right">
+
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp; New Admin user </a>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <table class="table table-striped border">
+        <tr class="table-info">
+            <th>
+                @Html.DisplayNameFor(m => m.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(m => m.Email)
+            </th>
+
+            <th>
+                Disabled
+            </th>
+
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(m => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.UserName)
+        </td>
+        <td>
+            @String.Format("{0:c}", item.Email)
+        </td>
+        <td>
+            @if (item.LockoutEnd != null && item.LockoutEnd > DateTime.Now)
+            {
+                <label>Disabled</label>
+            }
+
+        </td>
+        <td>
+            @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
+            {
+                <a role="button" class="btn btn-primary" href="@Url.Action("Edit/"+item.Id)">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a role="button" class="btn btn-danger" href="@Url.Action("Delete/"+item.Id)">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+            }
+        </td>
+
+    </tr>
+        }
+    </table>
+</div>
+

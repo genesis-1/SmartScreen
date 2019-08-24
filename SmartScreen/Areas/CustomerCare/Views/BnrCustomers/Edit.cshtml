@@ -1,0 +1,75 @@
+﻿@model SmartScreen.Models.BnrCustomer
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>CustomerAccountNumber
+<body>
+
+<h4>BnrCustomer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CustomerNumber" />
+            <div class="form-group">
+                <label class="control-label">CustomeNumber</label>
+                <input asp-for="CustomerNumber" class="form-control" required />
+                @*<select asp-for="CustomerAccountNumber" class="form-control" asp-items="ViewBag.CustomerAccountNumber"></select>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" required />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="VisionSBU" class="control-label"></label>
+                <select asp-for="VisionSBU" class="form-control" asp-items="ViewBag.VisionSBU"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="VillageList" class="control-label"></label>
+                <select asp-for="VillageList" class="form-control" asp-items="ViewBag.VillageList"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ResidenceTypeCode" class="control-label"></label>
+                <select asp-for="ResidenceTypeCode" class="form-control" asp-items="ViewBag.ResidenceTypeCode"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EducationCode" class="control-label"></label>
+                <select asp-for="EducationCode" class="form-control" asp-items="ViewBag.EducationCode"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NaiscCode" class="control-label"></label>
+                <select asp-for="NaiscCode" class="form-control" asp-items="ViewBag.NaiscCode"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EconomicSubSectorCodeId" class="control-label"></label>
+                <select asp-for="EconomicSubSectorCodeId" class="form-control" asp-items="ViewBag.EconomicSubSectorCodeId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="EconomicSubSectorCodeISICId" class="control-label"></label>
+                <select asp-for="EconomicSubSectorCodeISICId" class="form-control" asp-items="ViewBag.EconomicSubSectorCodeISICId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+</body>
+</html>

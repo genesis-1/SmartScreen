@@ -1,0 +1,78 @@
+﻿@model SmartScreen.Models.BnrCustomer
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+
+<div>
+    <h4>BnrCustomer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CustomerName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerNumber)
+        </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vision)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vision.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Village)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Village.VillagelistDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Residence)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Residence.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Education.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NaicsCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NaicsCode.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EconomicSubSectorCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EconomicSubSectorCode.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EconomicSubSectorCodeISIC)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EconomicSubSectorCodeISIC.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CustomerNumber">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</body>
+</html>

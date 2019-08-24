@@ -1,0 +1,166 @@
+﻿@model SmartScreen.Models.ViewModel.CustomerViewModel
+@using GraniteHouse2.Extensions
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<br />
+<h2 class="text-info">Create Customer</h2>
+
+<form asp-action="create" asp-controller="BnrCustomer" method="post">
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.CustomerAccountNumber"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="BnrCustomer.CustomerAccountNumber" class="form-control" />
+        </div>
+        <span asp-validation-for="BnrCustomer.CustomerAccountNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.FirstName"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="BnrCustomer.FirstName" class="form-control" required />
+        </div>
+        <span asp-validation-for="BnrCustomer.FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.LastName"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="BnrCustomer.LastName" class="form-control" required />
+        </div>
+        <span asp-validation-for="BnrCustomer.LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.VisionSBUId"></label>
+        </div>
+        <div class="col-5">
+            @*@Html.DropDownList("SelectedVisionSBUId", new SelectList((System.Collections.IEnumerable)ViewData["CustomerVM"]), "Id", "Description")*@
+            @*@Html.DropDownListFor(m => m.SelectedVisionSBUId, Model.VisionSBUs, new { @class = "form-control dropdown" })*@
+            @*<select asp-for="SelectedVisionSBUId" asp-items="Model.VisionSBUs" class="form-control">
+            <option>Select Vision</option>
+        </select>*@
+            <select asp-for="BnrCustomer.VisionSBUId" asp-items="Model.VisionSBUs.ToSelectListItem(Model.BnrCustomer.VisionSBUId)" class="form-control"></select>
+        </div>
+
+    </div>
+
+    @*<div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.VillageListId"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.VillageListId" asp-items="@(new SelectList(Model.VillageLists,"Id", "Villagelist"))" class="form-control"></select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.ResidenceTypeId"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.ResidenceTypeId" asp-items="@(new SelectList(Model.ResidenceTypes,"Id", "Description"))" class="form-control"></select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.EducationId"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.EducationId" asp-items="@(new SelectList(Model.Educations,"Id", "Description"))" class="form-control"></select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.NaiscCode"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.NaiscCode" asp-items="@(new SelectList(Model.NaicsCodes,"Id", "Description"))" class="form-control"></select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.EconomicSubSectorCodeId"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.EconomicSubSectorCodeId" asp-items="@(new SelectList(Model.EconomicSubSectorCodes,"Id", "Description"))" class="form-control"></select>
+        </div>
+
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">
+            <label asp-for="BnrCustomer.EconomicSubSectorCodeISICId"></label>
+        </div>
+        <div class="col-5">
+            <select asp-for="BnrCustomer.EconomicSubSectorCodeISICId" asp-items="@(new SelectList(Model.EconomicSubSectorCodeISICs,"Id", "Description"))" class="form-control"></select>
+        </div>
+
+    </div>*@
+    <br />
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" name="submit" value="Create" />
+        <a asp-action="Index" class="btn btn-success"> Back to List</a>
+        <button>Submit</button>
+    </div>
+
+</form>
+
+@section scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @*<script>
+        document.forms[0].onsubmit = () => {
+            let formData = new FormData(document.forms[0]);
+            fetch('/BnrCustomer/Create', {
+                method: 'POST',
+                body: new URLSearchParams(formData)
+            })
+                .then(() => {
+                    alert('Posted using Fetch');
+                });
+            return false;
+        };
+    </script>*@
+}
+@*<script>
+    const fetchAccountInformation = CustomerAccountNumberInput => fetch('/BnrCustomer/FindAccount/' + CustomerAccountNumberInput)
+        .then(response => response.json())
+        .then(customer => {
+            if (customer.length > 0) {
+                $('#BnrCustomer_FirstName').val(customer[0].firstName);
+                $('#BnrCustomer_LastName').val(customer[0].lastName);
+            } else {
+                $('#BnrCustomer_FirstName').val('');
+                $('#BnrCustomer_LastName').val('');
+            }
+        }).catch(() => alert('Check database connection'));
+    let fetchTimer = null;
+
+    $(document).ready(function () {
+        $('#BnrCustomer_CustomerAccountNumber').blur(function () {
+            let CustomerAccountNumberInput = $(this).val();
+            fetchAccountInformation(CustomerAccountNumberInput)
+        });
+    })
+</script>*@
+
+
